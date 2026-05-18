@@ -5,92 +5,96 @@ st.set_page_config(page_title="This Baptism Now Saves", page_icon="💧", layout
 st.sidebar.title("💧 This Baptism Now Saves")
 st.sidebar.markdown("**Why You Need to Rethink Your Position**  \n*by Bobby Warren*")
 
-page = st.sidebar.radio("Navigate the Book", [
+page = st.sidebar.radio("Navigate", [
     "🏠 Home",
     "❓ Ch1: Diagnostic Questions",
-    "📖 Chapter Explorer",
+    "📖 Full Chapter Explorer",
     "🛡️ Objection Crusher",
-    "📝 Full Study Guide",
+    "📝 Study Guide",
     "📜 Key Scriptures",
-    "📈 My Journey Tracker"
+    "📈 My Journey"
 ])
 
 if page == "🏠 Home":
     st.title("💧 This Baptism Now Saves")
-    st.subheader("Interactive Edition")
+    st.subheader("The Interactive Edition")
     st.markdown("""
-    Welcome to the living version of Bobby Warren’s book.  
-    This app turns the full manuscript into a guided discipleship tool.
-    
-    Use it personally, with a small group, or as a church resource.
+    This is the living digital companion to Bobby Warren’s book.  
+    Read key sections, answer the diagnostic questions, crush objections, and track your rethinking journey.
     """)
-    st.info("All content is taken directly from the book you wrote.")
+    st.success("All content drawn directly from the book.")
 
 elif page == "❓ Ch1: Diagnostic Questions":
     st.title("Chapter 1 — What Do You Actually Believe About Baptism?")
-    st.markdown("Answer these five questions honestly before diving deeper.")
-    qs = [
+    st.markdown("**Five questions worth sitting with** (from the book)")
+    questions = [
         "Where did baptism come from?",
         "What does the word 'baptism' actually mean?",
         "Does baptism connect to salvation in any way?",
         "What is the right mode?",
         "Who is the right candidate?"
     ]
-    for q in qs:
-        st.text_area(q, height=100, key=f"q_{q}")
+    for q in questions:
+        st.text_area(q, height=120, key=q)
 
-elif page == "📖 Chapter Explorer":
-    st.title("Chapter Explorer — Full Book")
-    chapters = {
-        "Ch 2: If Baptism Is a Work...": "Baptism is not a 'work of law'. It is a gospel command. See Titus 3:5 — saved by the washing of regeneration.",
-        "Ch 3: Is Baptism the Sinner's Prayer?": "1 Peter 3:21 — Baptism is 'an appeal to God for a good conscience'. This is the real sinner's prayer, happening in the water.",
-        "Ch 4: Restoration Movement": "The simple question: What does the New Testament actually say? The movement recovered believer’s immersion for the forgiveness of sins.",
-        "Ch 5: The Word They Wouldn't Translate": "Baptizō means immerse. Translators kept the sound instead of translating the meaning.",
-        "Ch 6: Acts 2:38": "Repent and be baptized... for the forgiveness of your sins.",
-        "Ch 7–9: History & Paul’s Images": "Buried, raised, clothed with Christ (Romans 6, Galatians 3).",
-        "Ch 10: Outward Sign?": "That phrase is not in the New Testament. It came from Zwingli.",
-        "Ch 11–12: Witnesses & Candidates": "Infant baptism entered later. New Testament pattern is believers.",
-        "Ch 13: Hard Questions": "Thief on the cross, godly grandmother, deathbed conversions.",
-        "Epilogue & Study Guide": "The water is where the appeal meets God’s promise."
+elif page == "📖 Full Chapter Explorer":
+    st.title("Chapter Explorer")
+    chapter = st.selectbox("Select a chapter/section", [
+        "Introduction — Why I Wrote This",
+        "Ch 2: If Baptism Is a Work...",
+        "Ch 3: Is Baptism the Sinner's Prayer?",
+        "Ch 4: Restoration Movement",
+        "Key Passages"
+    ])
+    
+    content = {
+        "Introduction — Why I Wrote This": """I was baptized as an infant. I think... That experience sent me on a journey... This book is written for Christians who have dismissed the idea that baptism might actually be connected to salvation.""",
+        
+        "Ch 2: If Baptism Is a Work...": """The most common objection... Paul’s “works” means works of law (erga nomou), not gospel commands. Baptism is not a work of merit — it is a faith-act where God does the saving (Titus 3:5, Colossians 2:12).""",
+        
+        "Ch 3: Is Baptism the Sinner's Prayer?": """1 Peter 3:21 — Baptism now saves you... as an appeal (eperotema) to God for a good conscience. The real sinner's prayer happens in the water (Acts 22:16).""",
+        
+        "Ch 4: Restoration Movement": """The simple question: What does the New Testament actually say? Alexander Campbell and others recovered believer’s immersion for the forgiveness of sins.""",
+        
+        "Key Passages": """Acts 2:38 • Romans 6:3-4 • Galatians 3:27 • 1 Peter 3:21 • Colossians 2:12"""
     }
-    ch = st.selectbox("Select Chapter", list(chapters.keys()))
-    st.markdown(f"**{ch}**\n\n{chapters[ch]}")
-    st.caption("Full text available in your PDF. This app gives the core arguments + reflections.")
+    
+    st.markdown(f"**{chapter}**\n\n{content[chapter]}")
+    st.caption("More full text can be added — let me know which chapter to expand next.")
 
 elif page == "🛡️ Objection Crusher":
-    st.title("Objection Crusher")
-    obj = st.selectbox("Pick a common objection", [
+    st.title("🛡️ Objection Crusher")
+    obj = st.selectbox("Choose an objection", [
         "Baptism is a work",
-        "Sinner's prayer is enough",
-        "It's just an outward sign",
+        "The sinner's prayer is how we’re saved",
+        "Baptism is just an outward sign",
         "What about the thief on the cross?",
-        "Infant baptism is biblical"
+        "Infant baptism"
     ])
     answers = {
-        "Baptism is a work": "Paul’s 'works' = works of the Mosaic Law. Baptism is a faith-act where *God* does the work (Colossians 2:12).",
-        "Sinner's prayer is enough": "The New Testament pattern is repentance + baptism as the appeal to God (Acts 22:16, 1 Peter 3:21).",
-        # ... more can be added
+        "Baptism is a work": "Paul excludes 'works of law', not gospel responses. Baptism is where God works (Col 2:12).",
+        "The sinner's prayer is how we’re saved": "The NT pattern is repentance + baptism as the appeal to God (1 Pet 3:21, Acts 22:16). The modern sinner's prayer is recent.",
+        # Add more as needed
     }
-    st.success(answers.get(obj, "Full response in the book — let's expand this!"))
+    st.success(answers.get(obj, "See the book for the full response."))
 
-elif page == "📝 Full Study Guide":
-    st.title("Personal & Group Study Guide")
-    st.markdown("Reflection questions for every chapter (from the book’s workbook).")
-    study_ch = st.selectbox("Choose Chapter for Reflection", ["Chapter 1", "Chapter 2", "Chapter 3", "..."])
-    st.text_area("Personal Reflection:", height=150)
-    st.text_area("What changed in my thinking?", height=100)
-    st.text_area("Group Discussion Notes:", height=150)
+elif page == "📝 Study Guide":
+    st.title("📝 Full Study Guide Reflections")
+    st.markdown("Interactive reflections from the book’s study guide.")
+    ch = st.selectbox("Chapter", ["Ch1", "Ch2", "Ch3", "General"])
+    st.text_area("My honest answers / What changed?", height=200)
+    st.text_area("Action step (personal or group)", height=150)
 
 elif page == "📜 Key Scriptures":
-    st.title("Key Scriptures with Commentary")
-    verses = ["Acts 2:38", "1 Peter 3:21", "Romans 6:3-4", "Galatians 3:27", "Colossians 2:12"]
-    v = st.selectbox("Select Verse", verses)
-    st.markdown(f"**{v}** — [Insert your full commentary from the book here]")
+    st.title("Key Scriptures")
+    verse = st.selectbox("Verse", ["Acts 2:38", "1 Peter 3:21", "Romans 6:3-4"])
+    st.write("**Book commentary goes here** — I can paste the full exegesis from your manuscript.")
 
-elif page == "📈 My Journey Tracker":
+elif page == "📈 My Journey":
     st.title("My Rethinking Journey")
-    progress = st.slider("How much has my position on baptism changed?", 0, 100, 30)
-    st.progress(progress/100)
-    st.text_area("Next step I'm considering (e.g., baptism, leading a group, further study)")
+    progress = st.slider("How much has my view on baptism changed?", 0, 100, 40)
+    st.progress(progress / 100)
+    st.text_area("Key takeaway so far")
+    st.text_area("Next step I'm prayerfully considering")
 
-st.caption("Full interactive edition of *This Baptism Now Saves* by Bobby Warren • Powered by Grok")
+st.caption("Interactive companion to *This Baptism Now Saves* by Bobby Warren • Built live with Grok")
